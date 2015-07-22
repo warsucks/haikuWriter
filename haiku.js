@@ -6,7 +6,7 @@ var wordArray = parseDict(dictionaryFile);
 
 var wordsBySyllableCount = groupWordsBySyllableCount(wordArray);
 
-var haikuStructure = [[2, 1, 2], [1, 2, 1, 1, 3], [3, 2]];
+var haikuStructure = [[2, 1, 2], [1, 2, 1, 1, 3], [2, 1, 2]];
 
 console.log(generateHaiku(haikuStructure, wordsBySyllableCount));
 
@@ -71,6 +71,14 @@ function groupWordsBySyllableCount(wordArray)
 function parseDict(dictFile)
 {
 	var wordArray = dictFile.split("\n");
+	wordArray.forEach(function(listing, index)
+	{
+		if(listing.match(/(\d)/))
+		{
+			wordArray.splice(index, 1);
+		}
+	});
+
 	wordArray = wordArray.map(function(listing)
 	{
 		var listingPieces = listing.split(" ");
